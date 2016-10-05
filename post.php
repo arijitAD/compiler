@@ -1,5 +1,8 @@
 <?php
 // check if required parameters have been set
+
+ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL); 
+
 $API_KEY = 'YOUR_API_KEY'; /* add your client secret here for testing */
 $errors = [];
 extract($_POST);
@@ -20,7 +23,7 @@ if (count($errors)) {
 $post_data = http_build_query([
     'client_secret' => $API_KEY,
     'lang' => $lang,
-    'source' => urlencode($source)
+    'source' => $source
 ]);
 $context_options = [
     'http' => [
@@ -33,4 +36,5 @@ $context_options = [
 $context = stream_context_create($context_options);
 $result = file_get_contents('http://api.hackerearth.com/code/compile/', false, $context);
 //echo result for AJAX call
+var_dump($result);
 echo json_decode($result);

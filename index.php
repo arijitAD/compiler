@@ -9,7 +9,8 @@
 <body>
 	<form action="">
 		<input type="text" id="lang" placeholder="Language" name="lang" required="" />
-		<input type="message" id="source" placeholder="Your code here" name="source" required="" />
+		<!-- <input type="message" id="source" placeholder="Your code here" name="source" > -->
+		<textarea id="source" name="source" ></textarea>
 		<input type="button" id="compile" value="Compile" name="compile">
 		<input type="button" id="run" value="Run" name="rum">
 	</form>
