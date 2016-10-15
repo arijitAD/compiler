@@ -3,7 +3,7 @@
 
 ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL); 
 
-$API_KEY = 'YOUR_API_KEY'; /* add your client secret here for testing */
+$API_KEY = '1a5359d8b8712bab25d8a50d35d2a323a24e6cea'; /* add your client secret here for testing */
 $errors = [];
 extract($_POST);
 
@@ -34,7 +34,19 @@ $context_options = [
     ]
 ];
 $context = stream_context_create($context_options);
-$result = file_get_contents('http://api.hackerearth.com/code/compile/', false, $context);
-//echo result for AJAX call
-var_dump($result);
-echo json_decode($result);
+$c_result = file_get_contents('http://api.hackerearth.com/code/compile/', false, $context);
+$c_result=json_decode($c_result,true);
+var_dump($c_result);
+if($c_result["compile_status"]!="OK")
+{
+    echo "Compilation Error";
+    var_dump($c_result);
+    echo $c_result["compile_status"];
+}
+else
+{
+    $r_result = file_get_contents('http://api.hackerearth.com/code/run/', false, $context);
+    //$r_reult=json_decode($r_result));
+    var_dump($r_result);
+    echo $r_result;
+}
